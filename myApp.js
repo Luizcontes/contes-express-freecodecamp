@@ -8,6 +8,11 @@ console.log(absolutePath)
 
 app.use('/public', express.static(absolutePath))
 
+app.use('/', (req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${req.ip}`)
+    next()
+})
+
 const pagePath = __dirname + '/views/index.html'
 app.get('/', (req, res) => {
     res.sendFile(pagePath)
