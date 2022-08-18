@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+require('dotenv').config()
 
 
 const absolutePath = __dirname + '/public'
@@ -13,7 +14,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/json', (req, res) => {
-    res.json({ message: 'Hello json'})
+    
+    const msg = { message: 'Hello json'}
+    if(process.env.MESSAGE_STYLE === 'uppercase') {
+        msg.message = msg.message.toLocaleUpperCase()
+    }
+
+    res.json(msg)
 })
 
 
