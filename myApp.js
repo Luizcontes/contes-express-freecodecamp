@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
     res.sendFile(pagePath)
 })
 
+app.get('/json', (req, res) => {
+    res.json({ message: 'Hello json'})
+})
+
 
 
 
