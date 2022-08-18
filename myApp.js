@@ -28,6 +28,14 @@ app.get('/json', (req, res) => {
     res.json(msg)
 })
 
+app.get('/now', (req, res, next) => {
+    req.time =  new Date().toString()
+    console.log(req.time)
+    next()
+}, (req, res, next) => {
+    res.json({ time: req.time })
+})
+
 
 
 
