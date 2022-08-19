@@ -1,14 +1,15 @@
 let express = require('express');
 let app = express();
 require('dotenv').config()
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { urlencoded } = require('body-parser');
 
 
 const absolutePath = __dirname + '/public'
 console.log(absolutePath)
 
 app.use('/public', express.static(absolutePath))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', (req, res, next) => {
     console.log(`${req.method} ${req.path} - ${req.ip}`)
@@ -49,8 +50,10 @@ app.route('/name')
         res.json({ name: `${req.query.first} ${req.query.last}` })
     })
     .post((req, res) => {
-        console.log(req.query)
-        res.json({ name: `${req.query.first} ${req.query.last}` })
+        // console.log(req.query)
+        // console.log(urlencoded_body)
+        // console.log(req.body)
+        res.json({ name: `${req.body.first} ${req.body.last}` })
     })
 
 module.exports = app;
